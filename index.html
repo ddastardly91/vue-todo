@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dastardly's Todo List</title>
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>My todo list</h1>
+    </header>
+
+    <div id="app">
+        <div class="inputs">
+            <input type="text" v-model="taskText" @keydown.enter="addTask">
+            <br>
+            <button @click="addTask">Add Task</button>
+            <button @click="hideTasks">Hide</button>
+            <button @click="clearTasks">Clear All</button>
+        </div>
+        <div class="listContainer" v-if="!isHidden">
+            <p v-if="tasks.length === 0">No tasks - Add task using the input above</p>
+            <ul>
+                <li class="task" v-for="(task, index) in tasks">- {{ task }} <i @click="taskDelete(index)" class="fa fa-trash-can" aria-hidden="true"></i><i @click="taskFav(index)" class="fa fa-heart" :class="{isFav: isFav[index]}" aria-hidden="true "></i></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
